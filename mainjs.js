@@ -25,36 +25,45 @@ const spotlight = document.getElementById('spotlight');
 const cursor    = document.getElementById('cursor');
 const cursorDot = document.getElementById('cursorDot');
 
-/* Position cible (souris réelle) et position courante (lerp) du curseur */
 let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
+let rafPending = false;
 
+/* ── Un seul listener mousemove → tout géré dans un RAF ── */
 document.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 
-  /* Spotlight : mise à jour instantanée (centré sur la souris via CSS translate) */
+  /* Spotlight et point central : mise à jour immédiate (pas de lag perceptible) */
   spotlight.style.left = mouseX + 'px';
   spotlight.style.top  = mouseY + 'px';
-
-  /* Point central du curseur : instantané aussi */
   cursorDot.style.left = mouseX + 'px';
   cursorDot.style.top  = mouseY + 'px';
+
+  /* Parallax hero : throttlé via flag RAF pour ne pas bloquer */
+  if (heroBg && !rafPending) {
+    rafPending = true;
+    requestAnimationFrame(() => {
+      const x = (mouseX / window.innerWidth  - 0.5) * 30;
+      const y = (mouseY / window.innerHeight - 0.5) * 15;
+      heroBg.style.transform = `translateY(calc(-50% + ${y}px)) translateX(${x}px)`;
+      rafPending = false;
+    });
+  }
 });
 
-/* Boucle RAF pour l'anneau du curseur avec lerp
-   cursorX += (cible - actuel) × facteur → converge vers la cible chaque frame */
+/* Boucle RAF pour l'anneau du curseur (lerp) */
 function animateCursor() {
   cursorX += (mouseX - cursorX) * 0.28;
   cursorY += (mouseY - cursorY) * 0.28;
   cursor.style.left = cursorX + 'px';
   cursor.style.top  = cursorY + 'px';
-  requestAnimationFrame(animateCursor); /* relance à chaque frame (~60fps) */
+  requestAnimationFrame(animateCursor);
 }
 animateCursor();
 
-/* Hover state : agrandit l'anneau et masque le point sur les éléments interactifs */
-document.querySelectorAll('a, button, .magnetic, .stat, .about-card, .project-card, .yt-card, .contact-item')
+/* Hover state curseur */
+document.querySelectorAll('a, button, .magnetic, .stat, .about-card, .project-card, .yt-stair, .contact-item')
   .forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -67,15 +76,7 @@ document.querySelectorAll('a, button, .magnetic, .stat, .about-card, .project-ca
    de la souris (effet de profondeur). Facteurs 30px et 15px = amplitude.
 ══════════════════════════════════════════════════════════════════════════════ */
 const heroBg = document.querySelector('.hero-bg-text');
-
-document.addEventListener('mousemove', e => {
-  if (!heroBg) return;
-  /* Normalise la position de la souris entre -0.5 et 0.5 */
-  const x = (e.clientX / window.innerWidth  - 0.5) * 30;
-  const y = (e.clientY / window.innerHeight - 0.5) * 15;
-  /* Applique le déplacement par-dessus le translateY(-50%) de centrage CSS */
-  heroBg.style.transform = `translateY(calc(-50% + ${y}px)) translateX(${x}px)`;
-});
+/* Le parallax de heroBg est géré dans le listener mousemove principal (section 1) */
 
 
 /* ══════════════════════════════════════════════════════════════════════════════

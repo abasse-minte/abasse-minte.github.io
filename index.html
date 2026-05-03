@@ -509,66 +509,93 @@
         <p class="yt-tagline">Je filme des souvenirs, des atmosphères,<br>des instants simples mais puissants.</p>
       </div>
 
-      <!-- Grille showcase : colonne large (featured) + colonne étroite (side) -->
-      <div class="yt-showcase">
+      <!-- Escalier horizontal : 4 cartes côte à côte, penchées haut-gauche → bas-droite -->
+      <div class="yt-staircase">
 
-        <!-- Grande carte EP.01 -->
-        <a class="yt-featured magnetic reveal-up"
+        <!-- EP.01 — haut gauche (la plus haute) -->
+        <a class="yt-stair yt-stair--1 magnetic reveal-up"
            href="https://www.youtube.com/watch?v=ST6p_OFVZjo&t=102s"
            target="_blank" rel="noopener">
-          <div class="yt-featured-img">
+          <div class="yt-stair-img">
             <img src="https://img.youtube.com/vi/ST6p_OFVZjo/maxresdefault.jpg" alt="MUÏO — Épisode 01" loading="lazy"/>
-            <div class="yt-noise"></div> <!-- grain film SVG -->
+            <div class="yt-noise"></div>
           </div>
-          <!-- Barre d'infos en bas : label + bouton play cercle + "Regarder →" (apparaît au hover) -->
-          <div class="yt-featured-info">
+          <div class="yt-stair-overlay"></div>
+          <div class="yt-stair-info">
             <span class="yt-ep-label">EP. 01</span>
-            <div class="yt-featured-play">
-              <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+            <div class="yt-stair-play">
+              <svg width="12" height="14" viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14" fill="currentColor"/></svg>
             </div>
-            <span class="yt-watch">Regarder →</span>
           </div>
-          <div class="yt-featured-overlay"></div> <!-- dégradé sombre en bas -->
+          <div class="yt-stair-title-block">
+            <span class="yt-stair-title">A childhood in Paris</span>
+            <span class="yt-stair-meta">10 min · 105 vues</span>
+          </div>
         </a>
 
-        <!-- Colonne 2 : deux petites cartes empilées -->
-        <div class="yt-side">
+        <!-- EP.02 — légèrement plus bas -->
+        <a class="yt-stair yt-stair--2 magnetic reveal-up"
+           href="https://www.youtube.com/watch?v=N8ZhFq7UIMk&t=12s"
+           target="_blank" rel="noopener">
+          <div class="yt-stair-img">
+            <img src="https://img.youtube.com/vi/N8ZhFq7UIMk/maxresdefault.jpg" alt="MUÏO — Épisode 02" loading="lazy"/>
+            <div class="yt-noise"></div>
+          </div>
+          <div class="yt-stair-overlay"></div>
+          <div class="yt-stair-info">
+            <span class="yt-ep-label">EP. 02</span>
+            <div class="yt-stair-play">
+              <svg width="12" height="14" viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14" fill="currentColor"/></svg>
+            </div>
+          </div>
+          <div class="yt-stair-title-block">
+            <span class="yt-stair-title">Last time at uni — 1st time at Disney</span>
+            <span class="yt-stair-meta">12 min · 37 vues</span>
+          </div>
+        </a>
 
-          <!-- Petite carte EP.02 -->
-          <a class="yt-side-card magnetic reveal-up"
-             href="https://www.youtube.com/watch?v=N8ZhFq7UIMk&t=12s"
-             target="_blank" rel="noopener">
-            <div class="yt-side-img">
-              <img src="https://img.youtube.com/vi/N8ZhFq7UIMk/maxresdefault.jpg" alt="MUÏO — Épisode 02" loading="lazy"/>
-              <div class="yt-noise"></div>
+        <!-- EP.03 — encore plus bas -->
+        <a class="yt-stair yt-stair--3 magnetic reveal-up"
+           href="https://www.youtube.com/watch?v=wYhYVsRsHxw&t=17s"
+           target="_blank" rel="noopener">
+          <div class="yt-stair-img">
+            <img src="https://img.youtube.com/vi/wYhYVsRsHxw/maxresdefault.jpg" alt="MUÏO — Épisode 03" loading="lazy"/>
+            <div class="yt-noise"></div>
+          </div>
+          <div class="yt-stair-overlay"></div>
+          <div class="yt-stair-info">
+            <span class="yt-ep-label">EP. 03</span>
+            <div class="yt-stair-play">
+              <svg width="12" height="14" viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14" fill="currentColor"/></svg>
             </div>
-            <div class="yt-side-info">
-              <span class="yt-ep-label">EP. 02</span>
-              <div class="yt-side-play">
-                <svg width="10" height="12" viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12" fill="currentColor"/></svg>
-              </div>
-            </div>
-            <div class="yt-side-overlay"></div>
-          </a>
+          </div>
+          <div class="yt-stair-title-block">
+            <span class="yt-stair-title">Paris by night</span>
+            <span class="yt-stair-meta">5 min · 33 vues</span>
+          </div>
+        </a>
 
-          <!-- Petite carte EP.03 -->
-          <a class="yt-side-card magnetic reveal-up"
-             href="https://www.youtube.com/watch?v=wYhYVsRsHxw&t=17s"
-             target="_blank" rel="noopener">
-            <div class="yt-side-img">
-              <img src="https://img.youtube.com/vi/wYhYVsRsHxw/maxresdefault.jpg" alt="MUÏO — Épisode 03" loading="lazy"/>
-              <div class="yt-noise"></div>
+        <!-- EP.04 — bas droite (la plus basse, la plus récente) -->
+        <a class="yt-stair yt-stair--4 magnetic reveal-up"
+           href="https://www.youtube.com/watch?v=_TnCSKOsZ_s&t=77s"
+           target="_blank" rel="noopener">
+          <div class="yt-stair-img">
+            <img src="https://img.youtube.com/vi/_TnCSKOsZ_s/maxresdefault.jpg" alt="MUÏO — Épisode 04" loading="lazy"/>
+            <div class="yt-noise"></div>
+          </div>
+          <div class="yt-stair-overlay"></div>
+          <div class="yt-stair-info">
+            <span class="yt-ep-label">EP. 04</span>
+            <div class="yt-stair-play">
+              <svg width="12" height="14" viewBox="0 0 12 14"><polygon points="0,0 12,7 0,14" fill="currentColor"/></svg>
             </div>
-            <div class="yt-side-info">
-              <span class="yt-ep-label">EP. 03</span>
-              <div class="yt-side-play">
-                <svg width="10" height="12" viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12" fill="currentColor"/></svg>
-              </div>
-            </div>
-            <div class="yt-side-overlay"></div>
-          </a>
+          </div>
+          <div class="yt-stair-title-block">
+            <span class="yt-stair-title">A glimpse into my student life</span>
+            <span class="yt-stair-meta">5 min · Nouveau</span>
+          </div>
+        </a>
 
-        </div>
       </div>
 
       <!-- Pied de section : handle + description en monospace -->

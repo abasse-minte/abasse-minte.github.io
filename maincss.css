@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════════
-   maincss.css — Abasse Minté Portfolio
+   maincss.css — Abasse Minté Portfolioe
    Structure :
    1.  RESET & VARIABLES
    2.  SPOTLIGHT
@@ -894,41 +894,45 @@ body.cursor-hover .cursor-dot { opacity: 0; }
   max-width: 260px;
 }
 
-/* Grille 2 colonnes : grande (1.6) + petite (1) séparées par 3px */
-.yt-showcase {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 3px;
-  background: var(--gray-100); /* fond gris = séparation visible */
-  margin-bottom: 24px;
+/* ── LAYOUT ESCALIER HORIZONTAL — 4 cartes côte à côte, diagonale haut-gauche → bas-droite ── */
+.yt-staircase {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;   /* alignement en haut → chaque carte descend */
+  gap: 4px;
+  margin-bottom: 32px;
+  /* Hauteur du conteneur = hauteur de la carte la plus basse + son décalage */
+  padding-bottom: 80px;
 }
 
-/* Grande carte featured EP.01 */
-.yt-featured {
+/* Carte de base */
+.yt-stair {
   position: relative;
-  aspect-ratio: 16/10;
+  flex: 1;                   /* toutes les cartes font la même largeur */
   overflow: hidden;
   display: block;
   text-decoration: none;
   background: var(--black);
+  border-radius: 2px;
+  /* La hauteur est fixe, le décalage vertical crée l'escalier */
+  height: 320px;
+  transition: transform .4s cubic-bezier(.25,.46,.45,.94), box-shadow .4s;
+  will-change: transform;
 }
 
-.yt-featured-img { position: absolute; inset: 0; }
-
-/* Image N&B par défaut → couleur + zoom au hover */
-.yt-featured-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: grayscale(60%) contrast(1.1);
-  transition: filter .6s, transform .6s;
+.yt-stair:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(0,0,0,.25);
+  z-index: 2;
 }
 
-.yt-featured:hover .yt-featured-img img {
-  filter: grayscale(0%) contrast(1.05);
-  transform: scale(1.04);
-}
+/* ── Décalage vertical progressif = escalier diagonal ── */
+.yt-stair--1 { margin-top: 0px;  }
+.yt-stair--2 { margin-top: 28px; }
+.yt-stair--3 { margin-top: 56px; }
+.yt-stair--4 { margin-top: 84px; }
 
-/* Texture grain SVG inline superposée en overlay (cinématique) */
+/* Grain film */
 .yt-noise {
   position: absolute;
   inset: 0;
@@ -938,35 +942,50 @@ body.cursor-hover .cursor-dot { opacity: 0; }
   opacity: .4;
 }
 
-/* Dégradé sombre du bas vers le haut (pour lisibilité des infos) */
-.yt-featured-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 50%);
+/* Image N&B → couleur au hover */
+.yt-stair-img { position: absolute; inset: 0; }
+
+.yt-stair-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(65%) contrast(1.1);
+  transition: filter .6s, transform .7s;
 }
 
-/* Barre d'infos en bas de la featured : EP.label | play | Regarder → */
-.yt-featured-info {
+.yt-stair:hover .yt-stair-img img {
+  filter: grayscale(0%) contrast(1.05);
+  transform: scale(1.06);
+}
+
+/* Dégradé bas pour lisibilité des infos */
+.yt-stair-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 50%, transparent 100%);
+}
+
+/* Barre EP + play en bas de carte */
+.yt-stair-info {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 28px 32px;
+  padding: 16px 18px 14px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   z-index: 2;
 }
 
-/* Label "EP. 01" en monospace */
+/* Label "EP. XX" */
 .yt-ep-label {
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: .6rem;
   letter-spacing: .25em;
   color: rgba(255,255,255,.5);
   text-transform: uppercase;
 }
 
-/* Bouton play circulaire de la featured */
-.yt-featured-play {
-  width: 44px; height: 44px;
+/* Bouton play circulaire */
+.yt-stair-play {
+  width: 34px; height: 34px;
   border: 1px solid rgba(255,255,255,.3);
   border-radius: 50%;
   display: flex;
@@ -974,81 +993,59 @@ body.cursor-hover .cursor-dot { opacity: 0; }
   justify-content: center;
   color: white;
   padding-left: 3px;
+  flex-shrink: 0;
   transition: border-color .3s, background .3s;
 }
 
-.yt-featured:hover .yt-featured-play {
+.yt-stair:hover .yt-stair-play {
   border-color: white;
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.12);
 }
 
-/* "Regarder →" invisible par défaut, apparaît au hover */
+/* Titre + meta au-dessus de la barre info */
+.yt-stair-title-block {
+  position: absolute;
+  bottom: 56px; left: 18px; right: 18px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s, transform .35s;
+}
+
+.yt-stair:hover .yt-stair-title-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.yt-stair-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(.8rem, 1.2vw, 1rem);
+  font-style: italic;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.yt-stair-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.45);
+}
+
+/* "Regarder →" — réutilisé dans le footer */
 .yt-watch {
   font-family: var(--font-mono);
   font-size: .65rem;
   letter-spacing: .15em;
-  color: rgba(255,255,255,0); /* totalement transparent */
-  margin-left: auto;
+  color: rgba(255,255,255,0);
   transition: color .3s;
+  white-space: nowrap;
 }
 
-.yt-featured:hover .yt-watch { color: rgba(255,255,255,.7); }
-
-/* Colonne de droite : 2 petites cartes empilées */
-.yt-side { display: flex; flex-direction: column; gap: 3px; }
-
-.yt-side-card {
-  position: relative;
-  flex: 1;
-  overflow: hidden;
-  display: block;
-  text-decoration: none;
-  background: var(--black);
-}
-
-.yt-side-img { position: absolute; inset: 0; }
-
-.yt-side-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: grayscale(70%) contrast(1.1);
-  transition: filter .5s, transform .5s;
-}
-
-.yt-side-card:hover .yt-side-img img {
-  filter: grayscale(0%);
-  transform: scale(1.06);
-}
-
-.yt-side-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 55%);
-}
-
-.yt-side-info {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 2;
-}
-
-/* Bouton play des petites cartes (plus petit que la featured) */
-.yt-side-play {
-  width: 32px; height: 32px;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  padding-left: 2px;
-  transition: border-color .3s;
-}
-
-.yt-side-card:hover .yt-side-play { border-color: white; }
+.yt-stair:hover .yt-watch { color: rgba(255,255,255,.7); }
 
 /* Pied de la section YouTube */
 .yt-footer { display: flex; align-items: center; gap: 12px; padding-top: 20px; }
@@ -1145,7 +1142,14 @@ body.cursor-hover .cursor-dot { opacity: 0; }
   .about-grid     { grid-template-columns: 1fr; gap: 48px; }
   .skills-grid    { grid-template-columns: 1fr; }
   .projects-grid  { grid-template-columns: 1fr; }
-  .yt-showcase    { grid-template-columns: 1fr; } /* showcase en colonne */
+  /* Sur mobile : escalier en colonne, toutes les cartes pleine largeur */
+  .yt-staircase { flex-direction: column; padding-bottom: 0; gap: 6px; }
+  .yt-stair--1, .yt-stair--2, .yt-stair--3, .yt-stair--4 {
+    margin-top: 0;
+    height: 200px;
+    width: 100%;
+  }
+  .yt-stair-title-block { opacity: 1; transform: none; bottom: 50px; }
   .about-stats    { gap: 16px; }
   .tl-item        { grid-template-columns: 60px 1fr; }
 }

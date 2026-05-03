@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abasse Minté — Futur Ingénieur Java</title>
+
+  <!-- ════════════════════════════════════════════════════════
+       GOOGLE FONTS
+       DM Serif Display → titres (hero, sections)
+       DM Mono          → labels, badges, nav, code
+       Syne             → corps de texte et UI générale
+  ════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Feuille de style principale -->
+  <link rel="stylesheet" href="maincss.css"/>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════════
+       EFFETS GLOBAUX — SPOTLIGHT & CURSEUR
+       Positionnés en fixed, pilotés intégralement par mainjs.js
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- Halo radial qui suit la souris (subtil sur fond blanc, inversé sur fond sombre) -->
+  <div class="spotlight" id="spotlight"></div>
+
+  <!-- Anneau extérieur du curseur — suit la souris avec lerp (léger délai fluide) -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Point central du curseur — suit la souris instantanément -->
+  <div class="cursor-dot" id="cursorDot"></div>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       NAVBAR — BARRE VERTICALE FIXÉE À DROITE
+       data-label = tooltip visible au hover
+       nav-line   = trait vertical animé qui grandit au hover/active
+  ════════════════════════════════════════════════════════ -->
+  <nav class="sidenav" id="sidenav">
+
+    <!-- Initiales affichées en écriture verticale (top de la barre) -->
+    <div class="nav-logo">AM</div>
+
+    <!-- Liens numérotés 01–06, chacun ancré sur une section -->
+    <div class="nav-links">
+      <a href="#about"    class="nav-item" data-label="À propos"> <span class="nav-line"></span><span class="nav-text">01</span></a>
+      <a href="#skills"   class="nav-item" data-label="Stack">    <span class="nav-line"></span><span class="nav-text">02</span></a>
+      <a href="#projects" class="nav-item" data-label="Projets">  <span class="nav-line"></span><span class="nav-text">03</span></a>
+      <a href="#timeline" class="nav-item" data-label="Parcours"> <span class="nav-line"></span><span class="nav-text">04</span></a>
+      <a href="#youtube"  class="nav-item" data-label="MUÏO">     <span class="nav-line"></span><span class="nav-text">05</span></a>
+      <a href="#contact"  class="nav-item" data-label="Contact">  <span class="nav-line"></span><span class="nav-text">06</span></a>
+    </div>
+
+    <!-- Raccourci téléchargement CV en bas de la barre -->
+    <a href="CV_ALTERNANCE_ABASSE_MINTE.pdf" class="nav-cv" download>CV ↓</a>
+
+  </nav>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION HERO — PLEIN ÉCRAN D'ACCUEIL
+       Éléments : nom, typewriter animé, citation, boutons CTA
+       reveal-up = classe d'animation au scroll (gérée par mainjs.js)
+  ════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <!-- "JAVA" géant en arrière-plan — parallax piloté à la souris via mainjs.js -->
+    <div class="hero-bg-text">JAVA</div>
+
+    <div class="hero-content">
+
+      <!-- Micro-label localisation -->
+      <p class="hero-eyebrow reveal-up">Paris, France — 2026</p>
+
+      <!-- Nom principal : "Abasse" (noir) / "Minté" (gris italic) -->
+      <h1 class="hero-name reveal-up">
+        <span class="name-first">Abasse</span>
+        <span class="name-last">Minté</span>
+      </h1>
+
+      <!-- Typewriter : préfixe fixe + #typewriter rempli dynamiquement par mainjs.js -->
+      <p class="hero-typewriter reveal-up">
+        <span class="tw-prefix">Futur ingénieur en </span>
+        <span class="tw-target" id="typewriter"></span>
+        <span class="tw-cursor">|</span> <!-- curseur clignotant en CSS pur -->
+      </p>
+
+      <!-- Citation personnelle de Saint-Exupéry -->
+      <p class="hero-quote reveal-up">
+        « Le plus beau métier du monde est celui d'unir les hommes »
+        <em>— Antoine de Saint-Exupéry</em>
+      </p>
+
+      <!-- Boutons d'action : btn-primary (fond noir) / btn-ghost (contour) -->
+      <div class="hero-cta reveal-up">
+        <a href="#projects" class="btn-primary magnetic">Voir mes projets</a>
+        <a href="#contact"  class="btn-ghost  magnetic">Me contacter</a>
+      </div>
+
+    </div>
+
+    <!-- Indicateur scroll en bas à gauche — barre qui défile en CSS pur -->
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-bar"></div>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 01 — À PROPOS
+       Grille 2 colonnes : bio + stats animées | cartes infos recruteur
+  ════════════════════════════════════════════════════════ -->
+  <section class="section" id="about">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">01 — À propos</div>
+
+      <div class="about-grid">
+
+        <!-- Colonne gauche : texte de présentation + chiffres clés -->
+        <div class="about-left reveal-up">
+          <h2 class="section-title">
+            Développeur,<br>
+            <em>architecte de code.</em>
+          </h2>
+          <p class="about-text">
+            Étudiant en 2ème année de <strong>BUT Informatique</strong> à l'IUT de Paris Rives de Seine,
+            je recherche un contrat d'apprentissage de <strong>3 ans</strong> spécialisé en développement
+            Java à partir de septembre 2026.
+          </p>
+          <p class="about-text">
+            Passionné d'architecture logicielle, je conçois mes projets en <strong>Agile Scrum</strong>,
+            applique les principes <strong>SOLID</strong> et maîtrise les design patterns.
+            Je ne lâche pas tant que ce n'est pas parfait.
+          </p>
+
+          <!-- Stats — data-target déclenche le compteur animé au scroll (mainjs.js) -->
+          <div class="about-stats">
+            <div class="stat magnetic">
+              <span class="stat-num" data-target="9">0</span>
+              <span class="stat-label">ans de basket</span>
+            </div>
+            <div class="stat magnetic">
+              <span class="stat-num" data-target="90">0</span><span class="stat-pct">%</span>
+              <span class="stat-label">trajets à vélo</span>
+            </div>
+            <div class="stat magnetic">
+              <span class="stat-num">∞</span> <!-- pas de data-target → valeur statique -->
+              <span class="stat-label">lignes de code</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : cartes clé/valeur pour le recruteur + chips loisirs -->
+        <div class="about-right reveal-up">
+
+          <div class="about-card magnetic">
+            <div class="card-label">Disponibilité</div>
+            <div class="card-value">Sept. 2026</div>
+          </div>
+          <div class="about-card magnetic">
+            <div class="card-label">Contrat recherché</div>
+            <div class="card-value">Apprentissage 3 ans</div>
+          </div>
+          <div class="about-card magnetic">
+            <div class="card-label">Spécialité</div>
+            <div class="card-value">Java · Spring Boot</div>
+          </div>
+          <div class="about-card magnetic">
+            <div class="card-label">Langues</div>
+            <div class="card-value">FR C2 · EN B2</div>
+          </div>
+
+          <!-- Chips passions / loisirs -->
+          <div class="about-passions">
+            <span class="passion-chip">🏀 Basket</span>
+            <span class="passion-chip">🚴 Vélo</span>
+            <span class="passion-chip">🎬 Cinéma</span>
+            <span class="passion-chip">🏎 F1</span>
+            <span class="passion-chip">🍤 Foodie</span>
+            <span class="passion-chip">🌲 Nature</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 02 — STACK TECHNIQUE
+       Fond sombre (section-dark). Barres de compétences animées
+       au scroll via IntersectionObserver (mainjs.js).
+       data-w = largeur cible de la barre (en %)
+  ════════════════════════════════════════════════════════ -->
+  <section class="section section-dark" id="skills">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">02 — Stack technique</div>
+      <h2 class="section-title reveal-up">Ce que je maîtrise.</h2>
+
+      <div class="skills-grid">
+
+        <!-- Bloc 1 : Langages logiciel -->
+        <div class="skill-block reveal-up">
+          <div class="skill-block-title">Développement logiciel</div>
+          <div class="skill-items">
+            <div class="skill-item magnetic">
+              <span class="skill-name">Java 23</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="95"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">C / C++</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="70"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">Python</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="65"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloc 2 : Web & Mobile -->
+        <div class="skill-block reveal-up">
+          <div class="skill-block-title">Web & Mobile</div>
+          <div class="skill-items">
+            <div class="skill-item magnetic">
+              <span class="skill-name">HTML / CSS / JS</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="88"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">React / React Native</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="72"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">PHP</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="60"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloc 3 : Data & Architecture -->
+        <div class="skill-block reveal-up">
+          <div class="skill-block-title">Data & Architecture</div>
+          <div class="skill-items">
+            <div class="skill-item magnetic">
+              <span class="skill-name">PostgreSQL / PL-SQL</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="80"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">Spring Boot</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="85"></div></div>
+            </div>
+            <div class="skill-item magnetic">
+              <span class="skill-name">Agile Scrum / SOLID</span>
+              <div class="skill-bar"><div class="skill-fill" data-w="75"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloc 4 : Outils sous forme de tags cliquables -->
+        <div class="skill-block reveal-up">
+          <div class="skill-block-title">Outils</div>
+          <div class="skill-tags">
+            <span class="skill-tag magnetic">Git</span>
+            <span class="skill-tag magnetic">Maven</span>
+            <span class="skill-tag magnetic">Android Studio</span>
+            <span class="skill-tag magnetic">JetBrains Suite</span>
+            <span class="skill-tag magnetic">StarUML</span>
+            <span class="skill-tag magnetic">XAMPP</span>
+            <span class="skill-tag magnetic">Figma</span>
+            <span class="skill-tag magnetic">Prompt Engineering</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bande design patterns — liste séparée par des points -->
+      <div class="patterns-row reveal-up">
+        <div class="patterns-label">Design Patterns maîtrisés</div>
+        <div class="patterns-list">
+          <span class="pattern-item magnetic">Bridge</span>
+          <span class="pattern-sep">·</span>
+          <span class="pattern-item magnetic">Decorator</span>
+          <span class="pattern-sep">·</span>
+          <span class="pattern-item magnetic">State</span>
+          <span class="pattern-sep">·</span>
+          <span class="pattern-item magnetic">Repository</span>
+          <span class="pattern-sep">·</span>
+          <span class="pattern-item magnetic">Factory</span>
+          <span class="pattern-sep">·</span>
+          <span class="pattern-item magnetic">Strategy</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 03 — PROJETS
+       Grille 3 colonnes (1 colonne sur mobile).
+       project-status--active = badge bordé "En cours"
+  ════════════════════════════════════════════════════════ -->
+  <section class="section" id="projects">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">03 — Projets</div>
+      <h2 class="section-title reveal-up">Ce que je construis.</h2>
+
+      <div class="projects-grid">
+
+        <!-- Projet 1 : MSE -->
+        <div class="project-card magnetic reveal-up">
+          <div class="project-num">01</div>
+          <div class="project-status project-status--active">En cours</div>
+          <h3 class="project-title">M.S.E</h3>
+          <p class="project-full">Muïo Stock Exchange</p>
+          <p class="project-desc">
+            Logiciel de gestion de flux financiers développé en Java avec intégration
+            future d'une IA en Python. Architecture domaine / service / persistence / contrôleur,
+            base PostgreSQL modélisée de zéro.
+          </p>
+          <div class="project-tags">
+            <span>Java</span><span>PostgreSQL</span><span>Spring Boot</span><span>IA Python</span>
+          </div>
+        </div>
+
+        <!-- Projet 2 : MPS -->
+        <div class="project-card magnetic reveal-up">
+          <div class="project-num">02</div>
+          <div class="project-status project-status--active">En cours</div>
+          <h3 class="project-title">M.P.S</h3>
+          <p class="project-full">Muïo Physic Simulator</p>
+          <p class="project-desc">
+            Simulateur physique de transports et d'analyse temps réel sans cloud.
+            Projet de 3 ans en vue d'une commercialisation. Développé en Java selon
+            les principes SOLID, Agile Scrum.
+          </p>
+          <div class="project-tags">
+            <span>Java</span><span>Agile Scrum</span><span>Temps réel</span><span>SOLID</span>
+          </div>
+        </div>
+
+        <!-- Projet 3 : ARTEM (stage) -->
+        <div class="project-card magnetic reveal-up">
+          <div class="project-num">03</div>
+          <div class="project-status">Stage · 2026</div>
+          <h3 class="project-title">ARTEM</h3>
+          <p class="project-full">Association ARTEM — Stack MERN</p>
+          <p class="project-desc">
+            Développement MERN assisté par Prompt Engineering pour optimiser l'architecture
+            et la documentation technique. Refonte complète d'une application associative.
+          </p>
+          <div class="project-tags">
+            <span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span><span>Prompt Engineering</span>
+          </div>
+        </div>
+
+        <!-- Projet 4 : Les Blouses Roses (académique) -->
+        <div class="project-card magnetic reveal-up">
+          <div class="project-num">04</div>
+          <div class="project-status">Académique</div>
+          <h3 class="project-title">Les Blouses Roses</h3>
+          <p class="project-full">Refonte site aide à l'enfance</p>
+          <p class="project-desc">
+            Refonte complète d'un site d'aide à l'enfance et aux seniors.
+            De la maquette Figma à l'implémentation HTML/CSS/PHP/SQL.
+          </p>
+          <div class="project-tags">
+            <span>Figma</span><span>HTML/CSS</span><span>PHP</span><span>PL/SQL</span>
+          </div>
+        </div>
+
+        <!-- Projet 5 : Game Dev (académique) -->
+        <div class="project-card magnetic reveal-up">
+          <div class="project-num">05</div>
+          <div class="project-status">Académique</div>
+          <h3 class="project-title">Game Dev</h3>
+          <p class="project-full">Jeux & simulations</p>
+          <p class="project-desc">
+            Développement de jeux vidéo et de programmes de simulation
+            en C et Java. Moteurs de physique, IA adversaire, systèmes de score.
+          </p>
+          <div class="project-tags">
+            <span>Java</span><span>C</span><span>Simulation</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Lien GitHub centré sous la grille -->
+      <div class="github-link reveal-up">
+        <a href="https://github.com/abasse-minte" target="_blank" class="btn-ghost magnetic">
+          → github.com/abasse-minte
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 04 — PARCOURS / TIMELINE
+       Fond sombre. Ligne verticale CSS + points.
+       tl-dot--main = point blanc = étape principale (BUT)
+  ════════════════════════════════════════════════════════ -->
+  <section class="section section-dark" id="timeline">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">04 — Parcours</div>
+      <h2 class="section-title reveal-up">Mon chemin.</h2>
+
+      <div class="timeline">
+
+        <!-- Étape 1 : Stage ARTEM 2026 -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2026</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Stage</div>
+            <h3>Développement MERN — Association ARTEM</h3>
+            <p>Développement full-stack assisté par Prompt Engineering. 8 semaines.</p>
+          </div>
+        </div>
+
+        <!-- Étape 2 : Technicien réseau 2025 -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2025</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Expérience pro</div>
+            <h3>Technicien Réseau — EPL</h3>
+            <p>Déploiement Wi-Fi sur 6 étages, installation et configuration de switchs.</p>
+          </div>
+        </div>
+
+        <!-- Étape 3 : BUT Informatique — point blanc = étape centrale -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2023</div>
+          <div class="tl-dot tl-dot--main"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Formation</div>
+            <h3>BUT Informatique — IUT Paris Rives de Seine</h3>
+            <p>Parcours développement · Java, bases de données, réseaux, algorithmique.</p>
+          </div>
+        </div>
+
+        <!-- Étape 4 : Prépa scientifique -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2022</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Formation</div>
+            <h3>Classe Prépa Scientifique — Lycée Le Corbusier</h3>
+            <p>Maths, Physique, Électronique, Programmation.</p>
+          </div>
+        </div>
+
+        <!-- Étape 5 : Baccalauréat -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2022</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Diplôme</div>
+            <h3>Baccalauréat STI2D — Mention Assez Bien</h3>
+            <p>Lycée Lucie Aubrac, Pantin · Spécialité Innovation Technologique.</p>
+          </div>
+        </div>
+
+        <!-- Étape 6 : Kids Coding Club — le déclic -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">2016</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content magnetic">
+            <div class="tl-type">Le déclic</div>
+            <h3>Kids Coding Club</h3>
+            <p>Scratch, Sketchup, impression 3D. Le début de tout.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 05 — MUÏO (YOUTUBE)
+       Layout éditorial : 1 grande carte featured (EP.01) à gauche
+       + 2 petites cartes empilées (EP.02 / EP.03) à droite.
+       Images en N&B par défaut → couleur au hover.
+       yt-noise = texture grain SVG inline superposée en overlay.
+  ════════════════════════════════════════════════════════ -->
+  <section class="section" id="youtube">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">05 — Créativité</div>
+
+      <!-- En-tête : titre MUÏO + tagline alignés sur une ligne -->
+      <div class="yt-header reveal-up">
+        <h2 class="section-title yt-title">
+          MU<span class="accent-char">Ï</span>O <!-- accent-char = italic CSS -->
+        </h2>
+        <p class="yt-tagline">Je filme des souvenirs, des atmosphères,<br>des instants simples mais puissants.</p>
+      </div>
+
+      <!-- Grille showcase : colonne large (featured) + colonne étroite (side) -->
+      <div class="yt-showcase">
+
+        <!-- Grande carte EP.01 -->
+        <a class="yt-featured magnetic reveal-up"
+           href="https://www.youtube.com/watch?v=ST6p_OFVZjo&t=102s"
+           target="_blank" rel="noopener">
+          <div class="yt-featured-img">
+            <img src="https://img.youtube.com/vi/ST6p_OFVZjo/maxresdefault.jpg" alt="MUÏO — Épisode 01" loading="lazy"/>
+            <div class="yt-noise"></div> <!-- grain film SVG -->
+          </div>
+          <!-- Barre d'infos en bas : label + bouton play cercle + "Regarder →" (apparaît au hover) -->
+          <div class="yt-featured-info">
+            <span class="yt-ep-label">EP. 01</span>
+            <div class="yt-featured-play">
+              <svg width="14" height="16" viewBox="0 0 14 16"><polygon points="0,0 14,8 0,16" fill="currentColor"/></svg>
+            </div>
+            <span class="yt-watch">Regarder →</span>
+          </div>
+          <div class="yt-featured-overlay"></div> <!-- dégradé sombre en bas -->
+        </a>
+
+        <!-- Colonne 2 : deux petites cartes empilées -->
+        <div class="yt-side">
+
+          <!-- Petite carte EP.02 -->
+          <a class="yt-side-card magnetic reveal-up"
+             href="https://www.youtube.com/watch?v=N8ZhFq7UIMk&t=12s"
+             target="_blank" rel="noopener">
+            <div class="yt-side-img">
+              <img src="https://img.youtube.com/vi/N8ZhFq7UIMk/maxresdefault.jpg" alt="MUÏO — Épisode 02" loading="lazy"/>
+              <div class="yt-noise"></div>
+            </div>
+            <div class="yt-side-info">
+              <span class="yt-ep-label">EP. 02</span>
+              <div class="yt-side-play">
+                <svg width="10" height="12" viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="yt-side-overlay"></div>
+          </a>
+
+          <!-- Petite carte EP.03 -->
+          <a class="yt-side-card magnetic reveal-up"
+             href="https://www.youtube.com/watch?v=wYhYVsRsHxw&t=17s"
+             target="_blank" rel="noopener">
+            <div class="yt-side-img">
+              <img src="https://img.youtube.com/vi/wYhYVsRsHxw/maxresdefault.jpg" alt="MUÏO — Épisode 03" loading="lazy"/>
+              <div class="yt-noise"></div>
+            </div>
+            <div class="yt-side-info">
+              <span class="yt-ep-label">EP. 03</span>
+              <div class="yt-side-play">
+                <svg width="10" height="12" viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="yt-side-overlay"></div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Pied de section : handle + description en monospace -->
+      <div class="yt-footer reveal-up">
+        <span class="yt-channel-handle">@muïo</span>
+        <span class="yt-sep">·</span>
+        <span class="yt-desc">Cinéma personnel · Atmosphères · Instants</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 06 — CONTACT
+       Fond sombre. Liens directs (email, téléphone, GitHub)
+       + bouton téléchargement CV.
+  ════════════════════════════════════════════════════════ -->
+  <section class="section section-dark" id="contact">
+    <div class="section-inner contact-inner">
+
+      <div class="section-tag reveal-up">06 — Contact</div>
+
+      <h2 class="section-title reveal-up contact-title">
+        Travaillons<br><em>ensemble.</em>
+      </h2>
+
+      <!-- Liens de contact cliquables (email, tel, GitHub) -->
+      <div class="contact-links reveal-up">
+        <a href="mailto:abasse.minte@gmail.com" class="contact-item magnetic">
+          <span class="contact-icon">✉</span>
+          <span>abasse.minte@gmail.com</span>
+        </a>
+        <a href="tel:+33784858243" class="contact-item magnetic">
+          <span class="contact-icon">☎</span>
+          <span>07 84 85 82 43</span>
+        </a>
+        <a href="https://github.com/abasse-minte" target="_blank" class="contact-item magnetic">
+          <span class="contact-icon">{ }</span>
+          <span>github.com/abasse-minte</span>
+        </a>
+      </div>
+
+      <!-- Bouton téléchargement CV — grand format -->
+      <a href="CV_ALTERNANCE_ABASSE_MINTE.pdf" class="btn-primary btn-large magnetic reveal-up" download>
+        Télécharger mon CV ↓
+      </a>
+
+      <!-- Note de bas de page -->
+      <p class="contact-footer reveal-up">Paris · Disponible sept. 2026</p>
+
+    </div>
+  </section>
+
+
+  <!-- Script principal chargé en fin de body (accès DOM garanti) -->
+  <script src="mainjs.js"></script>
+
+</body>
+</html>

@@ -863,7 +863,186 @@ body.cursor-hover .cursor-dot { opacity: 0; }
 
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   13. SECTION YOUTUBE — LAYOUT ÉDITORIAL
+   13. SECTION EXPÉRIENCES — JOBS TERRAIN
+   Fond blanc. Onglets Tech / Terrain. Même ADN que la timeline.
+   .jobs-tab--active   : onglet sélectionné (trait noir en bas)
+   .jobs-panel--active : contenu visible
+   .job-badge--active  : badge "En cours" avec bordure noire
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* Barre d'onglets */
+.jobs-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.jobs-tab {
+    font-family: var(--font-mono);
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    background: none;
+    border: none;
+    cursor: none;
+    padding: 12px 28px 12px 0;
+    position: relative;
+    transition: color .3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jobs-tab-num { color: var(--gray-100); transition: color .3s; }
+
+.jobs-tab--active { color: var(--black); }
+.jobs-tab--active .jobs-tab-num { color: var(--gray-300); }
+
+/* Trait actif sous l'onglet sélectionné */
+.jobs-tab--active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 100%; height: 2px;
+    background: var(--black);
+}
+
+/* Panneaux */
+.jobs-panel { display: none; }
+.jobs-panel--active { display: block; }
+
+/* Liste des items */
+.jobs-list { display: flex; flex-direction: column; gap: 0; }
+
+.job-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--gray-100);
+    align-items: start;
+}
+
+.job-item:first-child { border-top: 1px solid var(--gray-100); }
+
+/* Colonne gauche : date + badge */
+.job-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 3px;
+}
+
+.job-date {
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    letter-spacing: .1em;
+    color: var(--gray-500);
+}
+
+.job-badge {
+    font-family: var(--font-mono);
+    font-size: .55rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    display: inline-block;
+    width: fit-content;
+}
+
+/* Badge "En cours" : bordure noire comme .project-status--active */
+.job-badge--active {
+    color: var(--black);
+    border: 1px solid var(--black);
+    padding: 2px 7px;
+}
+
+/* Colonne droite : contenu */
+.job-content {
+    padding: 20px 24px;
+    border: 1px solid var(--gray-100);
+    transition: border-color .3s, background .3s;
+}
+
+.job-content:hover { border-color: var(--gray-300); background: var(--off); }
+
+.job-title {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.job-title em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--gray-500);
+}
+
+.job-desc {
+    font-size: .85rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+    margin-bottom: 16px;
+}
+
+/* Chips technos (même style que .project-tags) */
+.job-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.job-tags span {
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    padding: 3px 7px;
+    background: var(--gray-50);
+    color: var(--gray-500);
+    letter-spacing: .08em;
+}
+
+/* Grille compétences transversales (onglet Terrain) */
+.jobs-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+}
+
+.jobs-skill-card {
+    padding: 28px 24px;
+    background: var(--gray-50);
+    transition: background .3s;
+}
+
+.jobs-skill-card:hover { background: var(--gray-100); }
+
+.jobs-skill-icon {
+    font-size: 1.1rem;
+    color: var(--gray-300);
+    margin-bottom: 14px;
+}
+
+.jobs-skill-label {
+    font-family: var(--font-sans);
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 8px;
+}
+
+.jobs-skill-desc {
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    letter-spacing: .06em;
+    color: var(--gray-500);
+    line-height: 1.7;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   14. SECTION YOUTUBE — LAYOUT ÉDITORIAL
    Grande carte featured (EP.01) + 2 petites cartes empilées (EP.02/03).
    Toutes les images démarrent en N&B → couleur au hover.
    .yt-noise     : texture grain SVG inline, mix-blend overlay.
@@ -1066,7 +1245,7 @@ body.cursor-hover .cursor-dot { opacity: 0; }
 
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   14. SECTION CONTACT
+   15. SECTION CONTACT
    Fond sombre. Disposition verticale centrée.
    .contact-item : ligne cliquable avec icône + texte + hover fond/bordure
 ══════════════════════════════════════════════════════════════════════════════ */
@@ -1139,7 +1318,8 @@ body.cursor-hover .cursor-dot { opacity: 0; }
     .about-grid     { grid-template-columns: 1fr; gap: 48px; }
     .skills-grid    { grid-template-columns: 1fr; }
     .projects-grid  { grid-template-columns: 1fr; }
-    /* Sur mobile : 2 colonnes, sans décalage */
+    .jobs-skills-grid  { grid-template-columns: repeat(2, 1fr); }
+    .job-item          { grid-template-columns: 130px 1fr; gap: 24px; }
     .yt-staircase { grid-template-columns: repeat(2, 1fr); padding-bottom: 0; gap: 3px; }
     .yt-stair--1, .yt-stair--2, .yt-stair--3, .yt-stair--4 { margin-top: 0; }
     .yt-stair-title-block { opacity: 1; transform: none; }
@@ -1148,13 +1328,15 @@ body.cursor-hover .cursor-dot { opacity: 0; }
 }
 
 @media (max-width: 600px) {
-    .hero-cta     { flex-direction: column; }     /* boutons CTA empilés */
-    .hero-bg-text { display: none; }              /* "JAVA" masqué sur mobile */
+    .hero-cta     { flex-direction: column; }
+    .hero-bg-text { display: none; }
     .hero-name    { font-size: 3rem; }
     .sidenav      { width: 40px; }
-    .nav-text     { display: none; }              /* numéros masqués */
-    .nav-item::before { display: none; }          /* tooltips masqués */
-    .nav-logo, .nav-cv { display: none; }         /* AM et CV masqués */
+    .nav-text     { display: none; }
+    .nav-item::before { display: none; }
+    .nav-logo, .nav-cv { display: none; }
     .section { padding: 60px 56px 60px 24px; }
     .hero    { padding: 0 56px 0 24px; }
+    .job-item { grid-template-columns: 1fr; gap: 12px; }
+    .jobs-skills-grid { grid-template-columns: 1fr 1fr; }
 }

@@ -46,12 +46,13 @@
 
     <!-- Liens numérotés 01–06, chacun ancré sur une section -->
     <div class="nav-links">
-      <a href="#about"    class="nav-item" data-label="À propos"> <span class="nav-line"></span><span class="nav-text">01</span></a>
-      <a href="#skills"   class="nav-item" data-label="Stack">    <span class="nav-line"></span><span class="nav-text">02</span></a>
-      <a href="#projects" class="nav-item" data-label="Projets">  <span class="nav-line"></span><span class="nav-text">03</span></a>
-      <a href="#timeline" class="nav-item" data-label="Parcours"> <span class="nav-line"></span><span class="nav-text">04</span></a>
-      <a href="#youtube"  class="nav-item" data-label="MUÏO">     <span class="nav-line"></span><span class="nav-text">05</span></a>
-      <a href="#contact"  class="nav-item" data-label="Contact">  <span class="nav-line"></span><span class="nav-text">06</span></a>
+      <a href="#about"    class="nav-item" data-label="À propos">    <span class="nav-line"></span><span class="nav-text">01</span></a>
+      <a href="#skills"   class="nav-item" data-label="Stack">       <span class="nav-line"></span><span class="nav-text">02</span></a>
+      <a href="#projects" class="nav-item" data-label="Projets">     <span class="nav-line"></span><span class="nav-text">03</span></a>
+      <a href="#timeline" class="nav-item" data-label="Parcours">    <span class="nav-line"></span><span class="nav-text">04</span></a>
+      <a href="#jobs"     class="nav-item" data-label="Expériences"> <span class="nav-line"></span><span class="nav-text">05</span></a>
+      <a href="#youtube"  class="nav-item" data-label="MUÏO">        <span class="nav-line"></span><span class="nav-text">06</span></a>
+      <a href="#contact"  class="nav-item" data-label="Contact">     <span class="nav-line"></span><span class="nav-text">07</span></a>
     </div>
 
     <!-- Raccourci téléchargement CV en bas de la barre -->
@@ -490,7 +491,216 @@
 
 
   <!-- ════════════════════════════════════════════════════════
-       SECTION 05 — MUÏO (YOUTUBE)
+       SECTION 05 — EXPÉRIENCES TERRAIN
+       Fond clair. Deux onglets : Tech (stages/réseau) | Terrain (jobs à côté).
+       Même ADN visuel que la timeline mais sur fond blanc.
+       Les onglets sont pilotés par mainjs.js (classe .jobs-tab--active).
+  ════════════════════════════════════════════════════════ -->
+  <section class="section" id="jobs">
+    <div class="section-inner">
+
+      <div class="section-tag reveal-up">05 — Expériences</div>
+      <h2 class="section-title reveal-up">Sur le terrain.</h2>
+
+      <!-- Onglets de filtrage -->
+      <div class="jobs-tabs reveal-up">
+        <button class="jobs-tab jobs-tab--active" data-tab="tech">
+          <span class="jobs-tab-num">—</span> Tech &amp; Informatique
+        </button>
+        <button class="jobs-tab" data-tab="terrain">
+          <span class="jobs-tab-num">—</span> Jobs &amp; Missions
+        </button>
+      </div>
+
+      <!-- ── ONGLET TECH ── -->
+      <div class="jobs-panel jobs-panel--active" data-panel="tech">
+        <div class="jobs-list">
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Avr. 2026 — 8 sem.</span>
+              <span class="job-badge">Stage</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Développement MERN <em>— Association ARTEM 5</em></h3>
+              <p class="job-desc">Développement full-stack assisté par Prompt Engineering pour optimiser l'architecture et la documentation technique.</p>
+              <div class="job-tags"><span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Août 2025 — 3 j.</span>
+              <span class="job-badge">Pro</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Technicien Réseau <em>— Entreprises Publiques Locales</em></h3>
+              <p class="job-desc">Déploiement d'infrastructure Wi-Fi sur 6 étages : installation, câblage et configuration de switchs pour l'optimisation de la connectivité.</p>
+              <div class="job-tags"><span>Réseau</span><span>Wi-Fi</span><span>Switchs</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Avr. 2018 — 1 sem.</span>
+              <span class="job-badge">Stage</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Stage d'observation <em>— Crédit Agricole Technologie &amp; Services</em></h3>
+              <p class="job-desc">Initiation au développement Python et environnement IDLE.</p>
+              <div class="job-tags"><span>Python</span><span>IDLE</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Oct. 2016 — Juil. 2019</span>
+              <span class="job-badge">Cours</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Cours d'informatique <em>— Kids Coding Club</em></h3>
+              <p class="job-desc">Scratch, Sketchup, impression 3D, imprimante laser. Le début de tout.</p>
+              <div class="job-tags"><span>Scratch</span><span>Sketchup</span><span>Impression 3D</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── ONGLET TERRAIN ── -->
+      <div class="jobs-panel" data-panel="terrain">
+        <div class="jobs-list">
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Fév. 2026 — À ce jour</span>
+              <span class="job-badge job-badge--active">En cours</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Opérateur Polyvalent <em>— Student Pop</em></h3>
+              <p class="job-desc">Exécution de missions événementielles et logistiques sur mesure, privilégiant le sens du service et la flexibilité opérationnelle.</p>
+              <div class="job-tags"><span>Événementiel</span><span>Logistique</span><span>Service</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Nov. 2025 — À ce jour</span>
+              <span class="job-badge job-badge--active">En cours</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Opérateur Polyvalent <em>— RAS Intérim Paris</em></h3>
+              <p class="job-desc">Réalisation de diverses missions opérationnelles exigeant réactivité, adaptabilité et autonomie sur le terrain.</p>
+              <div class="job-tags"><span>Intérim</span><span>Adaptabilité</span><span>Terrain</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Déc. 2025 — Jan. 2026</span>
+              <span class="job-badge">Événementiel</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Hôte d'accueil événementiel <em>— Tiki Playa</em></h3>
+              <p class="job-desc">Gestion des entrées, contrôle d'accès et encaissement des clients lors de la soirée du Nouvel An.</p>
+              <div class="job-tags"><span>Accueil</span><span>Contrôle accès</span><span>Caisse</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Avr. 2025 — Avr. 2026</span>
+              <span class="job-badge">Saisonnier</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Opérateur Polyvalent <em>— Disneyland Paris</em></h3>
+              <p class="job-desc">Service en salle, kiosques. Accueil d'une clientèle internationale dans un environnement à fort trafic.</p>
+              <div class="job-tags"><span>Service</span><span>Relation client</span><span>International</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Sept. 2025 — Déc. 2025</span>
+              <span class="job-badge">Intérim</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Agent de tri <em>— Vinted Go</em></h3>
+              <p class="job-desc">Tri automatisé et manuel de colis, manutention au transpalette et optimisation des flux d'expédition.</p>
+              <div class="job-tags"><span>Logistique</span><span>Tri colis</span><span>Transpalette</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Sept. 2022 — Avr. 2026</span>
+              <span class="job-badge">Long terme</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Équipier de vente <em>— Naba Traiteur</em></h3>
+              <p class="job-desc">Accueil client, gestion des encaissements et mise en valeur de la vitrine.</p>
+              <div class="job-tags"><span>Vente</span><span>Caisse</span><span>Vitrine</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Sept. 2022 — Déc. 2024</span>
+              <span class="job-badge">Saisonnier</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Opérateur Polyvalent <em>— Parc Astérix</em></h3>
+              <p class="job-desc">Service en salle et plein air, gestion des stocks, kiosques, plongeur.</p>
+              <div class="job-tags"><span>Restauration</span><span>Stocks</span><span>Service</span></div>
+            </div>
+          </div>
+
+          <div class="job-item reveal-up">
+            <div class="job-meta">
+              <span class="job-date">Sept. 2022 — À ce jour</span>
+              <span class="job-badge job-badge--active">En cours</span>
+            </div>
+            <div class="job-content magnetic">
+              <h3 class="job-title">Manutentionnaire <em>— DPS Intérim Paris</em></h3>
+              <p class="job-desc">Déménagement et emménagement d'entreprises et de particuliers.</p>
+              <div class="job-tags"><span>Manutention</span><span>Déménagement</span><span>Intérim</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bloc compétences transversales -->
+        <div class="jobs-skills-grid reveal-up">
+          <div class="jobs-skill-card magnetic">
+            <div class="jobs-skill-icon">◎</div>
+            <div class="jobs-skill-label">Relation Client</div>
+            <div class="jobs-skill-desc">Clientèle internationale bilingue, flux en forte affluence</div>
+          </div>
+          <div class="jobs-skill-card magnetic">
+            <div class="jobs-skill-icon">◎</div>
+            <div class="jobs-skill-label">Logistique</div>
+            <div class="jobs-skill-desc">Pilotage des flux, tri haute cadence, optimisation stockage</div>
+          </div>
+          <div class="jobs-skill-card magnetic">
+            <div class="jobs-skill-icon">◎</div>
+            <div class="jobs-skill-label">Gestion du Stress</div>
+            <div class="jobs-skill-desc">Performance maintenue sous haute pression et fort trafic</div>
+          </div>
+          <div class="jobs-skill-card magnetic">
+            <div class="jobs-skill-icon">◎</div>
+            <div class="jobs-skill-label">Adaptabilité</div>
+            <div class="jobs-skill-desc">Polyvalence immédiate, réactivité, autonomie sur le terrain</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECTION 06 — MUÏO (YOUTUBE)
        Layout éditorial : 1 grande carte featured (EP.01) à gauche
        + 2 petites cartes empilées (EP.02 / EP.03) à droite.
        Images en N&B par défaut → couleur au hover.
@@ -499,7 +709,7 @@
   <section class="section" id="youtube">
     <div class="section-inner">
 
-      <div class="section-tag reveal-up">05 — Créativité</div>
+      <div class="section-tag reveal-up">06 — Créativité</div>
 
       <!-- En-tête : titre MUÏO + tagline alignés sur une ligne -->
       <div class="yt-header reveal-up">
@@ -617,7 +827,7 @@
   <section class="section section-dark" id="contact">
     <div class="section-inner contact-inner">
 
-      <div class="section-tag reveal-up">06 — Contact</div>
+      <div class="section-tag reveal-up">07 — Contact</div>
 
       <h2 class="section-title reveal-up contact-title">
         Travaillons<br><em>ensemble.</em>

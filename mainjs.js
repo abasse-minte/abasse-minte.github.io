@@ -295,3 +295,32 @@ window.addEventListener('load', () => {
     el.classList.add('visible');
   });
 });
+
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   11. ONGLETS — SECTION EXPÉRIENCES
+   Gestion des onglets Tech / Terrain dans #jobs.
+   Clic sur .jobs-tab → active l'onglet et affiche le panneau correspondant.
+   Re-déclenche les animations reveal-up dans le panneau fraîchement visible.
+══════════════════════════════════════════════════════════════════════════════ */
+document.querySelectorAll('.jobs-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+
+    /* Désactiver tous les onglets et panneaux */
+    document.querySelectorAll('.jobs-tab').forEach(t => t.classList.remove('jobs-tab--active'));
+    document.querySelectorAll('.jobs-panel').forEach(p => p.classList.remove('jobs-panel--active'));
+
+    /* Activer l'onglet cliqué et son panneau */
+    tab.classList.add('jobs-tab--active');
+    const panel = document.querySelector(`.jobs-panel[data-panel="${target}"]`);
+    panel.classList.add('jobs-panel--active');
+
+    /* Rejouer les reveal-up dans le nouveau panneau visible */
+    panel.querySelectorAll('.reveal-up:not(.visible)').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.95) el.classList.add('visible');
+    });
+  });
+});
+
